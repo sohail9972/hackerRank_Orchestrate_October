@@ -31,13 +31,24 @@ Your solution must:
 - Generate one prediction row for every request in `dataset/deletion_requests.csv`
 - Write the final predictions to `output.csv` in the repository root
 
-Run the starter Python entry point with:
+Install the Python dependency and generate predictions from the repository root:
 
-```bash
-python3 code/main.py
+```powershell
+python -m pip install -r code/requirements.txt
+python code/main.py
 ```
 
-The blank template at `dataset/output.csv` is provided as a reference. Your final generated file for submission must be the root-level `output.csv`.
+The same commands work in a POSIX shell using `python3` instead of `python`. The blank template at `dataset/output.csv` is provided as a reference. Your final generated file for submission must be the root-level `output.csv`.
+
+To validate the generated file and run the public-sample regression checks:
+
+```powershell
+python code/evaluation/main.py
+python code/main.py --input dataset/sample_deletion_requests.csv --output sample-output.csv
+python code/evaluation/main.py --input dataset/sample_deletion_requests.csv --output sample-output.csv
+```
+
+The audit engine is deterministic and makes no external model/API calls. Evidence parsing uses the participant-facing manifest; PDF extraction is provided by `pypdf`. Image OCR is attempted only when Tesseract is installed and available on `PATH`.
 
 
 ## Dataset
